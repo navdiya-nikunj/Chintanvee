@@ -167,15 +167,21 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div className="border">
+          <div className="border overflow-hidden">
             <div>
-              <img
+              {/* <img
                 src="./map.png"
                 alt="map"
                 onClick={() =>
                   window.open("https://maps.app.goo.gl/UUtra6CmicEEAxDx7")
                 }
-              />
+              /> */}
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3719.502217989804!2d72.9170236!3d21.2119246!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be04514150e05ef%3A0xaf0665b095f2bc43!2sAnnapurna%20Kathiyawadi%20Restaurant!5e0!3m2!1sen!2sin!4v1721562381871!5m2!1sen!2sin"
+                width="100%"
+                height="350"
+                loading="lazy"
+              ></iframe>
             </div>
           </div>
         </div>
