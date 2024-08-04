@@ -1,23 +1,24 @@
-// import Link from "next/link";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import { Separator } from "@/components/ui/separator";
-import { Icons } from "react-toastify";
-import GoogleMapReact from "google-map-react";
 import Countdown from "./CountDown";
+import Blessings from "./Blessings";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
-const Marker = ({ text }) => <div>{text}</div>;
-
-const Link = () => {
-  return <a>Link</a>;
-};
 export default function Home() {
-  const defaultProps = {
-    center: {
-      lat: 10.99835602,
-      lng: 77.01502627,
-    },
-    zoom: 11,
-  };
+  const [blessingMessages, setBlessingMessages] = useState([]);
+
+  useEffect(() => {
+    const fetch = async () => {
+      const res = await axios.get(
+        "https://script.google.com/macros/s/AKfycbylBsQBY-MCwsFMt96Bel0uuUzxvaWsW4pOfxuQC1QaD5lFrLBc7SHaoYT9XC3KKvRkSw/exec"
+      );
+      // console.log(res.data);
+      setBlessingMessages(res.data);
+      console.log(blessingMessages);
+    };
+    fetch();
+    console.log("hii");
+  }, []);
+
   return (
     <div className="flex flex-col min-h-[100dvh]">
       <section className="relative h-[80dvh] w-full overflow-hidden">
@@ -41,7 +42,6 @@ export default function Home() {
           </div>
           <div
             className="inline-flex h-10 items-center justify-center rounded-md bg-primary px-6 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
-            prefetch={false}
             onClick={() => {
               window.open("https://forms.gle/YYzRa8JCjUepq1oY6");
             }}
@@ -70,21 +70,21 @@ export default function Home() {
               <Link
                 href="#"
                 className="text-muted-foreground hover:text-primary"
-                prefetch={false}
+                 
               >
                 <InstagramIcon className="h-6 w-6" />
               </Link>
               <Link
                 href="#"
                 className="text-muted-foreground hover:text-primary"
-                prefetch={false}
+                 
               >
                 <TwitterIcon className="h-6 w-6" />
               </Link>
               <Link
                 href="#"
                 className="text-muted-foreground hover:text-primary"
-                prefetch={false}
+                 
               >
                 <FacebookIcon className="h-6 w-6" />
               </Link>
@@ -181,6 +181,9 @@ export default function Home() {
                 width="100%"
                 height="350"
                 loading="lazy"
+                onClick={() =>
+                  window.open("https://maps.app.goo.gl/UUtra6CmicEEAxDx7")
+                }
               ></iframe>
             </div>
           </div>
@@ -197,49 +200,7 @@ export default function Home() {
                 <Countdown />
               </div>
             </div>
-            <div className="space-y-4">
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
-                Guestbook
-              </h2>
-              <div className="rounded-lg border p-4">
-                <div className="flex items-center gap-4">
-                  <Avatar>
-                    <AvatarImage src="/placeholder-user.jpg" />
-                    <AvatarFallback>GU</AvatarFallback>
-                  </Avatar>
-                  <div className="flex-1">
-                    <p className="font-medium">John Doe</p>
-                    <p className="text-muted-foreground">Congratulations!</p>
-                  </div>
-                </div>
-                <Separator className="my-4" />
-                <div className="flex items-center gap-4">
-                  <Avatar>
-                    <AvatarImage src="/placeholder-user.jpg" />
-                    <AvatarFallback>JA</AvatarFallback>
-                  </Avatar>
-                  <div className="flex-1">
-                    <p className="font-medium">Jane Arden</p>
-                    <p className="text-muted-foreground">
-                      Wishing you both a lifetime of happiness!
-                    </p>
-                  </div>
-                </div>
-                <Separator className="my-4" />
-                <div className="flex items-center gap-4">
-                  <Avatar>
-                    <AvatarImage src="/placeholder-user.jpg" />
-                    <AvatarFallback>SM</AvatarFallback>
-                  </Avatar>
-                  <div className="flex-1">
-                    <p className="font-medium">Sarah Miller</p>
-                    <p className="text-muted-foreground">
-                      Can't wait to celebrate with you!
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
+            {blessingMessages && <Blessings data={blessingMessages} />}
           </div>
         </div>
       </section>
@@ -253,84 +214,5 @@ export default function Home() {
         </div>
       </footer>
     </div>
-  );
-}
-
-function FacebookIcon(props) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
-    </svg>
-  );
-}
-
-function InstagramIcon(props) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
-      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-      <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
-    </svg>
-  );
-}
-
-function TwitterIcon(props) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" />
-    </svg>
-  );
-}
-
-function XIcon(props) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M18 6 6 18" />
-      <path d="m6 6 12 12" />
-    </svg>
   );
 }
