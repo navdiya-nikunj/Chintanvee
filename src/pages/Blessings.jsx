@@ -6,11 +6,13 @@ const Blessings = ({ data }) => {
   return (
     <div className="space-y-4">
       <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
-        Guestbook
+        Blessings
       </h2>
-      <div className="rounded-lg border p-4">
+      <div className="rounded-lg border p-4 max-h-64 overflow-y-scroll">
         {data.map((item, idx) => {
+          const last = data.length - 1;
           if (idx > 0) {
+            const sep = idx != last;
             return (
               <div key={idx}>
                 <div className="flex items-center gap-4">
@@ -25,7 +27,7 @@ const Blessings = ({ data }) => {
                     <p className="text-muted-foreground">{item[3]}</p>
                   </div>
                 </div>
-                {!idx === data.length - 1 && <Separator className="my-4" />}
+                {sep && <Separator className="my-4" />}
               </div>
             );
           }

@@ -46,7 +46,7 @@ export default function Home() {
               window.open("https://forms.gle/YYzRa8JCjUepq1oY6");
             }}
           >
-            I'm Attending
+            Give Blessing Message
           </div>
         </div>
       </section>
@@ -194,7 +194,7 @@ export default function Home() {
           <div className="grid gap-8 md:grid-cols-2 md:gap-12 lg:gap-16">
             <div className="space-y-4">
               <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
-                Countdown to Our Wedding
+                Countdown to Our Ring Ceremony
               </h2>
               <div>
                 <Countdown />
